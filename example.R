@@ -6,21 +6,21 @@ grViz("
       # graph, node, and edge definitions
       graph [
         compound = true,
-        nodesep = 0.5,
+        nodesep = 2.5,
         ranksep = 0.25,
-        color = crimson]
+        color = orange]
 
       node [
-        fontname = Helvetica,
+        fontname = Ubuntu,
         fontcolor = darkslategray,
         shape = rectangle,
         fixedsize = true,
         width = 1,
-        color = darkslategray
+        color = blue
       ]
 
       edge [
-        color = grey,
+        color = pink,
         arrowhead = none,
         arrowtail = none
       ]
