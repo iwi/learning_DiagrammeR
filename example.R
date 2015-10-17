@@ -1,56 +1,58 @@
 library(DiagrammeR)
+
 grViz("
-  digraph boxes_and_circles {
+  digraph nicegraph {
 
-
-    alpha
-    @@1-1; @@1-2; @@1-3; @@1-4; @@1-5
-    @@1-6; @@1-7; @@1-8; @@1-9; @@1-10
-
-
-      # a 'graph' statement
+      # graph, node, and edge definitions
       graph [
-        overlap = true,
-        fontsize = 10
-      ]
-
-      # several 'node' statements
-      node [
-        shape = box,
-        fontname = Helvetica
-      ]
-      A; B; C; D; E; F
+        compound = true,
+        nodesep = 0.5,
+        ranksep = 0.25,
+        color = crimson]
 
       node [
-        shape = circle,
+        fontname = Helvetica,
+        fontcolor = darkslategray,
+        shape = rectangle,
         fixedsize = true,
-        width = 0.9
-      ] // sets as circles
-      1; 2; 3; 4; 5; 6; 7; 8
+        width = 1,
+        color = darkslategray
+      ]
 
-      subgraph {
-        rank = same; 1; 3; 4;
+      edge [
+        color = grey,
+        arrowhead = none,
+        arrowtail = none
+      ]
+
+      # subgraph for R information
+      subgraph cluster0 {
+        node [
+          fixedsize = true,
+          width = 3
+        ]
+        '@@1-1' -> '@@1-2' -> '@@1-3' -> '@@1-4'
+        '@@1-4' -> '@@1-5' -> '@@1-6' -> '@@1-7'
       }
 
-      # several 'edge' statements
-      A -> 1
-      B -> { 2, 3, 4, B }
-      C -> A
-      1 -> D
-      E -> { A, 6 }
-      2 -> 4
-      1 -> 5
-      1 -> F
-      4 -> 6
-      5 -> 7
-      6 -> 7
-      3 -> { 8, 1 }
-      8 -> 6
-    B [ fillcolor = red ]
+      # subgraph for RStudio information
+      subgraph cluster1 {
+        node [fixedsize = true,
+              width = 3
+        ]
+        '@@2' -> '@@3'
+      }
+
+      Information [width = 1.5]
+      Information -> R
+      Information -> RStudio
+      R -> '@@1-1'            [lhead = cluster0]
+      RStudio -> '@@2'        [lhead = cluster1]
+
   }
 
-[1]: LETTERS
-
+  [1]: paste0(names(R.Version())[1:7], ':\\n ', R.Version()[1:7])
+  [2]: paste0('Current program mode:\\n ', rstudioapi::versionInfo()[[2]]) # paste0('RStudio version:\\n ', rstudioapi::versionInfo()[[1]])
+  [3]: paste0('Current program mode:\\n ', rstudioapi::versionInfo()[[2]])
 
 ")
-
