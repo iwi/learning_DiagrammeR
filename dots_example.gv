@@ -1,0 +1,30 @@
+grViz("
+digraph dot {
+
+node [shape = circle,
+      style = filled,
+      color = grey,
+      label = '']
+
+node [
+  fillcolor = red,
+  fontname = Ubuntu
+]
+1 2 3
+
+node [fillcolor = green]
+b c d
+
+node [fillcolor = orange]
+e f g h i j k l m n o p q r s t u v
+
+
+edge [color = grey]
+1 -> b
+2 -> c
+3 -> d
+b -> {e f g h i j}
+c -> {k l m n o p}
+d -> {q r s t u v}
+}",
+      engine = "dot")
