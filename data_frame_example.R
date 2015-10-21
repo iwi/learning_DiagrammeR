@@ -4,60 +4,108 @@
 ###
 
 library(DiagrammeR)
-
-# Create a node data frame
-nodes_1 <-
-  create_nodes(nodes = c("a", "b", "c", "d"),
-               label = FALSE,
-               type = "lower",
-               style = "filled",
-               color = "aqua",
-               shape = c("circle", "circle",
-                         "rectangle", "rectangle"),
-               data = c(3.5, 2.6, 9.4, 2.7))
-
-# Create another node data frame
-nodes_2 <-
-  create_nodes(nodes = c("e", "f", "g", "h"),
-               label = FALSE,
-               type = "upper",
-               style = "filled",
-               color = "red",
-               shape = "triangle",
-               data = c(0.5, 3.9, 3.7, 8.2))
-
-###
-# Combine two data frames for nodes
-###
-
-# Combine node data frames with 'combine_nodes'
-all_nodes <- combine_nodes(nodes_1, nodes_2)
+library(magrittr)
+library(V8)
 
 
-###
-# Create two data frames for edges
-# Singly supplied attribute values are repeated down
-###
 
-# Create an edge data frame
-edges_1 <-
-  create_edges(from = c("a", "a", "b", "c"),
-               to = c("b", "d", "d", "a"),
-               relationship = "requires",
-               color = "green",
-               data = c(2.7, 8.9, 2.6, 0.6))
 
-# Create another edge data frame
-edges_2 <-
-  create_edges(from = c("e", "g", "h", "h"),
-               to = c("g", "h", "f", "e"),
-               relationship = "receives",
-               arrowhead = "dot",
-               color = "red")
+# create a new graph series
 
-###
-# Combine two data frames for edges
-###
+series <- create_series(series_type = "sequential")
 
-# Combine edge data frames with 'combine_edges'
-all_edges <- combine_edges(edges_1, edges_2)
+
+nodes <-
+  create_nodes(
+    nodes = c(
+      "Name1", "Name2", "Name3", "Name4",
+      "d1", "a1", "b1", "o1"
+      ),
+    label = c(
+      "Dict", "Alice", "Bob", "Origin",
+      "D1",  "A1", "B1", "O1"
+      ),
+    type = "lower",
+    style = "filled",
+    shape = c(
+      "rectangle", "rectangle", "rectangle", "rectangle",
+      "circle", "circle", "circle", "circle"
+      ),
+    color = c(
+      rep(x = "lightgrey", 4),
+      rep(x = "orange", 4)
+      ),
+    x = c(
+      1, 3, 5, 7,
+      1, 3, 5, 7
+      ),
+    y = c(
+      7, 7, 7, 7,
+      6, 6, 6, 6
+      )
+  )
+
+graph_1 <-
+  create_graph(
+    nodes_df = nodes,
+    graph_attrs = c("layout = neato"),
+    node_attrs = c("color = orange",
+                   "fixedsize = true"),
+    edge_attrs = c("relationship = requires",
+                   "arrowhead = inv",
+                   "color = grey")
+  )
+
+render_graph(graph_1)
+
+graph_1 %>%
+  add_to_series(series) ->
+  series
+
+graph_1 %>%
+  add_node(node = "d2",
+           from = "d1",
+           label = "D2",
+           style = "filled",
+           shape = "circle",
+           color = "orange",
+           x = 1,
+           y = 5
+          ) ->
+  graph_2
+
+render_graph(graph_2)
+
+graph_2 %>%
+  add_to_series(series) ->
+  series
+
+render_graph_from_series(
+  graph_series = series,
+  graph_no = 2)
+
+graph_2 %>%
+  add_node(node = "a2",
+           from = "a1",
+           label = "A2",
+           style = "filled",
+           shape = "circle",
+           color = "orange",
+           x = 3,
+           y = 5
+  ) ->
+  graph_3
+
+render_graph(graph_3)
+
+graph_3 %>%
+  add_to_series(series) ->
+  series
+
+render_graph_from_series(
+  graph_series = series,
+  graph_no = 3)
+
+
+
+

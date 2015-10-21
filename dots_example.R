@@ -3,13 +3,16 @@ digraph dot {
 
 node [shape = circle,
       style = filled,
+      alpha = 0.5,
       color = grey,
-      label = '']
+      label = 1
+]
 
 node [fillcolor = red]
 1 2 3
 
-node [fillcolor = green]
+node [fillcolor = green,
+]
 b c d
 
 node [fillcolor = orange]

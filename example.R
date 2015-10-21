@@ -8,7 +8,9 @@ grViz("
         compound = true,
         nodesep = 2.5,
         ranksep = 0.25,
-        color = orange]
+        color = orange,
+        style = filled
+      ]
 
       node [
         fontname = Ubuntu,
