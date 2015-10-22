@@ -106,6 +106,45 @@ render_graph_from_series(
   graph_series = series,
   graph_no = 3)
 
+graph_3 %>%
+  add_node(node = "a3b",
+           from = "a2",
+           label = "A3b",
+           style = "filled",
+           shape = "circle",
+           color = "yellow",
+           x = 4,
+           y = 4
+  ) ->
+  graph_4
 
+graph_4 %>%
+  add_to_series(series) ->
+  series
+
+render_graph_from_series(
+  graph_series = series,
+  graph_no = 4)
+
+
+graph_4 %>%
+  add_node(node = "a4",
+           from = "a2",
+           label = "A4",
+           style = "filled",
+           shape = "circle",
+           color = "orange",
+           x = 3,
+           y = 3
+  ) ->
+  graph_5
+
+graph_5 %>%
+  add_to_series(series) ->
+  series
+
+render_graph_from_series(
+  graph_series = series,
+  graph_no = 5)
 
 
