@@ -5,16 +5,12 @@
 
 library(DiagrammeR)
 library(magrittr)
-library(V8)
-
-
-
+# library(V8)
 
 # create a new graph series
-
 series <- create_series(series_type = "sequential")
 
-
+# Set up: just the labels
 nodes <-
   create_nodes(
     nodes = c(
@@ -42,17 +38,20 @@ nodes <-
 graph_1 <-
   create_graph(
     nodes_df = nodes,
-    graph_attrs = c("layout = neato",
-                    "overlap = 'false'",
-                    "fontname = Ubuntu"
-                    ),
-    node_attrs = c("color = orange",
-                   "fixedsize = true"
-                   ),
-    edge_attrs = c("relationship = requires",
-                   "arrowhead = inv",
-                   "color = grey"
-                   )
+    graph_attrs = c(
+      "layout = neato",
+      "overlap = 'false'",
+      "fontname = Ubuntu"
+      ),
+    node_attrs = c(
+      "color = orange",
+      "fixedsize = true"
+      ),
+    edge_attrs = c(
+      "relationship = requires",
+      "arrowhead = inv",
+      "color = grey"
+      )
   )
 
 render_graph(graph_1)
@@ -62,13 +61,14 @@ graph_1 %>%
   series
 
 graph_1 %>%
-  add_node(node = "d1",
-           label = "D1",
-           style = "filled",
-           shape = "circle",
-           color = "orange",
-           x = 1,
-           y = 6
+  add_node(
+    node = "d1",
+    label = "D1",
+    style = "filled",
+    shape = "circle",
+    color = "orange",
+    x = 1,
+    y = 6
   ) ->
   graph_2
 
@@ -79,15 +79,16 @@ graph_2 %>%
   series
 
 graph_2 %>%
-  add_node(node = "d2",
-           from = "d1",
-           label = "D2",
-           style = "filled",
-           shape = "circle",
-           color = "orange",
-           x = 1,
-           y = 5
-          ) ->
+  add_node(
+    node = "d2",
+    from = "d1",
+    label = "D2",
+    style = "filled",
+    shape = "circle",
+    color = "orange",
+    x = 1,
+    y = 5
+    ) ->
   graph_3
 
 render_graph(graph_3)
