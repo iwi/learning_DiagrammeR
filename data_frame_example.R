@@ -28,10 +28,10 @@ nodes <-
       rep(x = "lightgrey", 4)
       ),
     x = c(
-      1, 3, 5, 3
+      9, 9, 1, 4
       ),
     y = c(
-      7, 7, 7, 15
+      7, 15, 7, 15
       )
   )
 
@@ -65,7 +65,7 @@ graph_1 %>%
     style = "filled",
     shape = "circle",
     color = "orange",
-    x = 1,
+    x = 9,
     y = 6
   ) ->
   graph_2
@@ -96,7 +96,7 @@ graph_3 %>%
     style = "filled",
     shape = "circle",
     color = "orange",
-    x = 3,
+    x = 4,
     y = 14
   ) ->
   graph_4
@@ -117,7 +117,6 @@ graph_4 %>%
   graph_5
 
 render_graph(graph_5)
-graph_5
 
 graph_5 %>%
   add_node(
@@ -126,8 +125,8 @@ graph_5 %>%
     style = "filled",
     shape = "circle",
     color = "orange",
-    x = 3,
-    y = 6
+    x = 9,
+    y = 14
   ) %>%
   add_node(
     node = "b1",
@@ -135,7 +134,7 @@ graph_5 %>%
     style = "filled",
     shape = "circle",
     color = "orange",
-    x = 5,
+    x = 1,
     y = 6
   ) ->
   graph_6
@@ -150,8 +149,8 @@ graph_6 %>%
     style = "filled",
     shape = "circle",
     color = "orange",
-    x = 4,
-    y = 5
+    x = 10,
+    y = 13
   ) ->
   graph_7
 
@@ -180,7 +179,7 @@ graph_8 %>%
     style = "filled",
     shape = "circle",
     color = "orange",
-    x = 2,
+    x = 10,
     y = 5
   ) ->
   graph_9
@@ -191,16 +190,20 @@ graph_9 %>%
   add_node(
     node = "d2",
     from = c("d1", "d2b"),
-    label = "A2",
+    label = "A2m",
     style = "filled",
     shape = "circle",
     color = "orange",
-    x = 1,
+    x = 9,
     y = 4
   ) ->
   graph_10
 
 render_graph(graph_10)
+
+
+
+
 
 graph_11 %>%
   add_to_series(series) ->
