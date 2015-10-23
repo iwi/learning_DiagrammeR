@@ -35,6 +35,8 @@ nodes <-
       )
   )
 
+# Build first graph with just the labels.
+# Parameters are the ones that will be used by defoult if not specified
 graph_1 <-
   create_graph(
     nodes_df = nodes,
@@ -57,10 +59,6 @@ graph_1 <-
 render_graph(graph_1)
 
 graph_1 %>%
-  add_to_series(series) ->
-  series
-
-graph_1 %>%
   add_node(
     node = "d1",
     label = "A1",
@@ -73,12 +71,25 @@ graph_1 %>%
   graph_2
 
 render_graph(graph_2)
+graph_2
+
+new_edges <- create_edges(
+  from = "dictator",
+  to = "origin",
+  color = "lightseagreen",
+  tooltip = "push"
+)
 
 graph_2 %>%
-  add_to_series(series) ->
-  series
+  add_edges(
+    edges_df = new_edges
+  ) ->
+  graph_3
 
-graph_2 %>%
+render_graph(graph_3)
+graph_3
+
+graph_3 %>%
   add_node(
     node = "o1",
     label = "A1",
@@ -88,28 +99,36 @@ graph_2 %>%
     x = 3,
     y = 14
   ) ->
-  graph_3
-
-render_graph(graph_3)
-
-graph_3 %>%
-  add_to_series(series) ->
-  series
-
-graph_3 %>%
-  add_edges(
-    from = "dictator",
-    to = "origin"
-  ) ->
   graph_4
 
 render_graph(graph_4)
 
-graph_4 %>%
-  add_to_series(series) ->
-  series
+new_edges <- create_edges(
+  from = c("origin", "origin"),
+  to = c("alice", "bob"),
+  color = "lightseagreen",
+  tooltip = "pull"
+)
 
 graph_4 %>%
+  add_edges(
+    edges_df = new_edges
+  ) ->
+  graph_5
+
+render_graph(graph_5)
+graph_5
+
+graph_5 %>%
+  add_node(
+    node = "a1",
+    label = "A1",
+    style = "filled",
+    shape = "circle",
+    color = "orange",
+    x = 3,
+    y = 6
+  ) %>%
   add_node(
     node = "b1",
     label = "A1",
@@ -119,52 +138,33 @@ graph_4 %>%
     x = 5,
     y = 6
   ) ->
-  graph_5
-
-render_graph(graph_5)
-
-graph_5 %>%
-  add_to_series(series) ->
-  series
-
-graph_5 %>%
-  add_edges(
-    from = "origin",
-    to = "bob"
-  ) ->
   graph_6
 
 render_graph(graph_6)
 
 graph_6 %>%
-  add_to_series(series) ->
-  series
-
-graph_6 %>%
   add_node(
-    node = "a1",
-    label = "A1",
+    node = "a2",
+    from = "a1",
+    label = "A2",
     style = "filled",
     shape = "circle",
     color = "orange",
-    x = 3,
-    y = 6
+    x = 4,
+    y = 5
   ) ->
   graph_7
 
 render_graph(graph_7)
 
-graph_7 %>%
-  add_to_series(series) ->
-  series
-
 new_edges <- create_edges(
-  from = "origin",
-  to = "alice",
-  color = "pink"
+  from = "alice",
+  to = "dictator",
+  color = "lightseagreen",
+  tooltip = "pull"
 )
 
-graph_8 %>%
+graph_7 %>%
   add_edges(
     edges_df = new_edges
   ) ->
@@ -173,42 +173,34 @@ graph_8 %>%
 render_graph(graph_8)
 
 graph_8 %>%
-  add_to_series(series) ->
-  series
-
-graph_9 %>%
   add_node(
-    node = "a2",
-    from = "a1",
-    label = "A2",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 3,
-    y = 5
-  ) ->
-  graph_10
-
-render_graph(graph_10)
-
-graph_10 %>%
-  add_to_series(series) ->
-  series
-
-graph_10 %>%
-  add_node(
-    node = "d2",
+    node = "d2b",
     from = "d1",
     label = "A2",
     style = "filled",
     shape = "circle",
     color = "orange",
-    x = 1,
+    x = 2,
     y = 5
   ) ->
-  graph_11
+  graph_9
 
-render_graph(graph_11)
+render_graph(graph_9)
+
+graph_9 %>%
+  add_node(
+    node = "d2",
+    from = c("d1", "d2b"),
+    label = "A2",
+    style = "filled",
+    shape = "circle",
+    color = "orange",
+    x = 1,
+    y = 4
+  ) ->
+  graph_10
+
+render_graph(graph_10)
 
 graph_11 %>%
   add_to_series(series) ->
