@@ -14,7 +14,7 @@ series <- create_series(series_type = "sequential")
 nodes <-
   create_nodes(
     nodes = c(
-      "Name1", "Name2", "Name3", "Name4"
+      "dictator", "alice", "bob", "origin"
       ),
     label = c(
       "Dict", "Alice", "Bob", "Origin"
@@ -28,10 +28,10 @@ nodes <-
       rep(x = "lightgrey", 4)
       ),
     x = c(
-      1, 3, 5, 7
+      1, 3, 5, 3
       ),
     y = c(
-      7, 7, 7, 7
+      7, 7, 7, 15
       )
   )
 
@@ -49,8 +49,8 @@ graph_1 <-
       ),
     edge_attrs = c(
       "relationship = requires",
-      "arrowhead = inv",
-      "color = grey"
+      "arrowhead = normal",
+      "color = 'lightgrey'"
       )
   )
 
@@ -63,7 +63,7 @@ graph_1 %>%
 graph_1 %>%
   add_node(
     node = "d1",
-    label = "D1",
+    label = "A1",
     style = "filled",
     shape = "circle",
     color = "orange",
@@ -80,15 +80,14 @@ graph_2 %>%
 
 graph_2 %>%
   add_node(
-    node = "d2",
-    from = "d1",
-    label = "D2",
+    node = "o1",
+    label = "A1",
     style = "filled",
     shape = "circle",
     color = "orange",
-    x = 1,
-    y = 5
-    ) ->
+    x = 3,
+    y = 14
+  ) ->
   graph_3
 
 render_graph(graph_3)
@@ -98,15 +97,9 @@ graph_3 %>%
   series
 
 graph_3 %>%
-  add_node(
-    node = "o1",
-    from = "d1",
-    label = "O1",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 7,
-    y = 6
+  add_edges(
+    from = "dictator",
+    to = "origin"
   ) ->
   graph_4
 
@@ -118,8 +111,7 @@ graph_4 %>%
 
 graph_4 %>%
   add_node(
-    node = "a1",
-    from = "o1",
+    node = "b1",
     label = "A1",
     style = "filled",
     shape = "circle",
@@ -131,90 +123,103 @@ graph_4 %>%
 
 render_graph(graph_5)
 
-graph_4 %>%
+graph_5 %>%
   add_to_series(series) ->
   series
 
+graph_5 %>%
+  add_edges(
+    from = "origin",
+    to = "bob"
+  ) ->
+  graph_6
 
+render_graph(graph_6)
 
+graph_6 %>%
+  add_to_series(series) ->
+  series
 
+graph_6 %>%
+  add_node(
+    node = "a1",
+    label = "A1",
+    style = "filled",
+    shape = "circle",
+    color = "orange",
+    x = 3,
+    y = 6
+  ) ->
+  graph_7
 
+render_graph(graph_7)
 
+graph_7 %>%
+  add_to_series(series) ->
+  series
 
+new_edges <- create_edges(
+  from = "origin",
+  to = "alice",
+  color = "pink"
+)
 
+graph_8 %>%
+  add_edges(
+    edges_df = new_edges
+  ) ->
+  graph_8
 
+render_graph(graph_8)
 
+graph_8 %>%
+  add_to_series(series) ->
+  series
 
+graph_9 %>%
+  add_node(
+    node = "a2",
+    from = "a1",
+    label = "A2",
+    style = "filled",
+    shape = "circle",
+    color = "orange",
+    x = 3,
+    y = 5
+  ) ->
+  graph_10
 
+render_graph(graph_10)
 
+graph_10 %>%
+  add_to_series(series) ->
+  series
 
+graph_10 %>%
+  add_node(
+    node = "d2",
+    from = "d1",
+    label = "A2",
+    style = "filled",
+    shape = "circle",
+    color = "orange",
+    x = 1,
+    y = 5
+  ) ->
+  graph_11
+
+render_graph(graph_11)
+
+graph_11 %>%
+  add_to_series(series) ->
+  series
+
+graph_11$graph_name <- "git_workflow"
 
 render_graph_from_series(
   graph_series = series,
   graph_no = 2)
 
-graph_2 %>%
-  add_node(node = "a2",
-           from = "a1",
-           label = "A2",
-           style = "filled",
-           shape = "circle",
-           color = "orange",
-           x = 3,
-           y = 5
-  ) ->
-  graph_3
-
-render_graph(graph_3)
-
-graph_3 %>%
-  add_to_series(series) ->
-  series
-
-render_graph_from_series(
-  graph_series = series,
-  graph_no = 3)
-
-graph_3 %>%
-  add_node(node = "a3b",
-           from = "a2",
-           label = "A3b",
-           style = "filled",
-           shape = "circle",
-           color = "yellow",
-           x = 4,
-           y = 4
-  ) ->
-  graph_4
-
-graph_4 %>%
-  add_to_series(series) ->
-  series
-
-render_graph_from_series(
-  graph_series = series,
-  graph_no = 4)
-
-
-graph_4 %>%
-  add_node(node = "a4",
-           from = "a2",
-           label = "A4",
-           style = "filled",
-           shape = "circle",
-           color = "orange",
-           x = 3,
-           y = 3
-  ) ->
-  graph_5
-
-graph_5 %>%
-  add_to_series(series) ->
-  series
-
-render_graph_from_series(
-  graph_series = series,
-  graph_no = 5)
 
 #___________________________________
 
