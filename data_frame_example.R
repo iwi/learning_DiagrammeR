@@ -43,6 +43,7 @@ graph_1 <-
     graph_attrs = c(
       "layout = neato",
       "overlap = 'false'",
+      "splines = 'true'",
       "fontname = Ubuntu"
       ),
     node_attrs = c(
@@ -61,7 +62,7 @@ render_graph(graph_1)
 graph_1 %>%
   add_node(
     node = "d1",
-    label = "A1",
+    label = "A",
     style = "filled",
     shape = "circle",
     color = "orange",
@@ -92,7 +93,7 @@ graph_3
 graph_3 %>%
   add_node(
     node = "o1",
-    label = "A1",
+    label = "A",
     style = "filled",
     shape = "circle",
     color = "orange",
@@ -121,7 +122,7 @@ render_graph(graph_5)
 graph_5 %>%
   add_node(
     node = "a1",
-    label = "A1",
+    label = "A",
     style = "filled",
     shape = "circle",
     color = "orange",
@@ -130,7 +131,7 @@ graph_5 %>%
   ) %>%
   add_node(
     node = "b1",
-    label = "A1",
+    label = "A",
     style = "filled",
     shape = "circle",
     color = "orange",
@@ -145,7 +146,7 @@ graph_6 %>%
   add_node(
     node = "a2",
     from = "a1",
-    label = "A2",
+    label = "B",
     style = "filled",
     shape = "circle",
     color = "orange",
@@ -175,7 +176,7 @@ graph_8 %>%
   add_node(
     node = "d2b",
     from = "d1",
-    label = "A2",
+    label = "B",
     style = "filled",
     shape = "circle",
     color = "orange",
@@ -190,7 +191,7 @@ graph_9 %>%
   add_node(
     node = "d2",
     from = c("d1", "d2b"),
-    label = "A2m",
+    label = "C",
     style = "filled",
     shape = "circle",
     color = "orange",
@@ -200,6 +201,59 @@ graph_9 %>%
   graph_10
 
 render_graph(graph_10)
+
+graph_10 %>%
+  add_node(
+    node = "o2",
+    from = "o1",
+    label = "B",
+    style = "filled",
+    shape = "circle",
+    color = "orange",
+    x = 5,
+    y = 13
+  ) %>%
+  add_node(
+    node = "o3",
+    from = c("o1", "o2"),
+    label = "C",
+    style = "filled",
+    shape = "circle",
+    color = "orange",
+    x = 4,
+    y = 12
+  ) ->
+  graph_11
+
+render_graph(graph_11)
+
+graph_11 %>%
+  add_node(
+    node = "b2",
+    from = "b1",
+    label = "D",
+    style = "filled",
+    shape = "circle",
+    color = "orange",
+    x = 2,
+    y = 5
+  ) %>%
+  add_node(
+    node = "b3",
+    from = "b2",
+    label = "E",
+    style = "filled",
+    shape = "circle",
+    color = "orange",
+    x = 2,
+    y = 4
+  ) ->
+  graph_12
+
+render_graph(graph_12)
+
+#
+
 
 
 
