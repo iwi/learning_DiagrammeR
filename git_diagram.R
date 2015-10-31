@@ -378,6 +378,14 @@ graph_14 %>%
   graph_15
 
 render_graph(graph_15)
+display_graph_object(graph_15)
+render_graph(graph_15, output = "DOT")
+
+node_present(graph_15, node = "b3")
+
+get_edges(graph_15, return_type = "df")
+
+get_predecessors(graph_15, "b5")
 
 graph_15 %>%
   delete_node( # Error in if (all(!(colnames(edges_df)[j] %in% c("edgetooltip", "headtooltip",  : missing value where TRUE/FALSE needed
