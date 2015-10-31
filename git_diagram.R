@@ -352,11 +352,7 @@ graph_13 %>%
 render_graph(graph_14)
 
 graph_14 %>%
-  delete_edge(
-    from = "b2",
-    to = "b3"
-  ) %>%
-  delete_node( # this doesn't work Error in if (all(!(colnames(edges_df)[j] %in% c("edgetooltip", "headtooltip",  : missing value where TRUE/FALSE needed
+  delete_node(
     node = "b2"
   ) %>%
   add_node(
@@ -374,18 +370,22 @@ graph_14 %>%
       to = c("b2", "b3"),
       color = "lightgrey"
     )
+  ) %>%
+  delete_edge(
+    from = "b2",
+    to = "b3"
   ) ->
   graph_15
 
 render_graph(graph_15)
 
 graph_15 %>%
-  delete_node(
+  delete_node( # Error in if (all(!(colnames(edges_df)[j] %in% c("edgetooltip", "headtooltip",  : missing value where TRUE/FALSE needed
     node = "b3"
   ) %>%
   add_node(
     node = "b3",
-    label = "E"
+    label = "E",
     style = "filled",
     shape = "circle",
     color = "orange",
