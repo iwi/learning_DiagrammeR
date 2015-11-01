@@ -375,6 +375,7 @@ graph_14 %>%
   graph_15
 
 render_graph(graph_15)
+
 display_graph_object(graph_15)
 render_graph(graph_15, output = "DOT")
 
@@ -386,29 +387,8 @@ get_predecessors(graph_15, "b5")
 
 node_type(graph_15, node = "b5", action = "create", value =  )
 
-g <- graph_15
-node <- "b3"
-revised_nodes_df <- g$nodes_df[-which(g$nodes_df$nodes == node),]
-revised_edges_df <- g$edges_df[-which((g$edges_df$from == node) |
-                                        (g$edges_df$to == node)),]
-
-
-g$graph_attrs
-g$directed
-
-new_g <-
-  create_graph(
-    nodes_df = revised_nodes_df,
-    edges_df = revised_edges_df,
-    directed = g$directed,
-    graph_attrs = g$graph_attrs
-  )
-
-
-
-
 graph_15 %>%
-  delete_node( # Error in if (all(!(colnames(edges_df)[j] %in% c("edgetooltip", "headtooltip",  : missing value where TRUE/FALSE needed
+  delete_node(
     node = "b3"
   ) %>%
   add_node(
@@ -429,7 +409,7 @@ graph_15 %>%
   ) ->
   graph_16
 
-
+render_graph(graph_16)
 
 
 
