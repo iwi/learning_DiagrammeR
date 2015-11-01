@@ -73,8 +73,7 @@ render_graph(graph_2)
 new_edges <- create_edges(
   from = "dictator",
   to = "origin",
-  color = "lightseagreen",
-  tooltip = "push"
+  color = "lightseagreen"
 )
 
 graph_2 %>%
@@ -103,8 +102,7 @@ render_graph(graph_4)
 new_edges <- create_edges(
   from = c("origin", "origin"),
   to = c("alice", "bob"),
-  color = "lightseagreen",
-  tooltip = "pull"
+  color = "lightseagreen"
 )
 
 graph_4 %>%
@@ -165,8 +163,7 @@ render_graph(graph_7)
 new_edges <- create_edges(
   from = "alice",
   to = "dictator",
-  color = "lightseagreen",
-  tooltip = "pull"
+  color = "lightseagreen"
 )
 
 graph_7 %>%
@@ -386,6 +383,29 @@ node_present(graph_15, node = "b3")
 get_edges(graph_15, return_type = "df")
 
 get_predecessors(graph_15, "b5")
+
+node_type(graph_15, node = "b5", action = "create", value =  )
+
+g <- graph_15
+node <- "b3"
+revised_nodes_df <- g$nodes_df[-which(g$nodes_df$nodes == node),]
+revised_edges_df <- g$edges_df[-which((g$edges_df$from == node) |
+                                        (g$edges_df$to == node)),]
+
+
+g$graph_attrs
+g$directed
+
+new_g <-
+  create_graph(
+    nodes_df = revised_nodes_df,
+    edges_df = revised_edges_df,
+    directed = g$directed,
+    graph_attrs = g$graph_attrs
+  )
+
+
+
 
 graph_15 %>%
   delete_node( # Error in if (all(!(colnames(edges_df)[j] %in% c("edgetooltip", "headtooltip",  : missing value where TRUE/FALSE needed
