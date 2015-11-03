@@ -3,6 +3,20 @@
 # Singly supplied attribute values are repeated down
 ###
 
+source("/home/iwi/projectes/DiagrammeR/R/add_node.R")
+source("/home/iwi/projectes/DiagrammeR/R/create_graph.R")
+source("/home/iwi/projectes/DiagrammeR/R/combine_graphs.R")
+source("/home/iwi/projectes/DiagrammeR/R/create_nodes.R")
+source("/home/iwi/projectes/DiagrammeR/R/node_present.R")
+source("/home/iwi/projectes/DiagrammeR/R/get_nodes.R")
+source("/home/iwi/projectes/DiagrammeR/R/is_graph_empty.R")
+source("/home/iwi/projectes/DiagrammeR/R/combine_nodes.R")
+source("/home/iwi/projectes/DiagrammeR/R/is_graph_directed.R")
+source("/home/iwi/projectes/DiagrammeR/R/add_node_df.R")
+source("/home/iwi/projectes/DiagrammeR/R/")
+
+
+
 library(DiagrammeR)
 library(magrittr)
 # library(V8)
@@ -57,14 +71,16 @@ graph_1 <-
 render_graph(graph_1)
 
 graph_1 %>%
-  add_node(
-    node = "d1",
-    label = "A",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 9,
-    y = 6
+  add_node_df(
+    node_df = create_nodes(
+      nodes = "d1",
+      label = "A",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 9,
+      y = 6
+    )
   ) ->
   graph_2
 
@@ -77,8 +93,8 @@ new_edges <- create_edges(
 )
 
 graph_2 %>%
-  add_edges(
-    edges_df = new_edges
+  add_edge_df(
+    edge_df = new_edges
   ) ->
   graph_3
 
@@ -86,213 +102,216 @@ render_graph(graph_3)
 graph_3
 
 graph_3 %>%
-  add_node(
-    node = "o1",
-    label = "A",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 4,
-    y = 14
+  add_node_df(
+    node_df = create_nodes(
+      node = "o1",
+      label = "A",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 4,
+      y = 14
+    )
   ) ->
   graph_4
 
 render_graph(graph_4)
 
-new_edges <- create_edges(
-  from = c("origin", "origin"),
-  to = c("alice", "bob"),
-  color = "lightseagreen"
-)
-
 graph_4 %>%
-  add_edges(
-    edges_df = new_edges
+  add_edge_df(
+    edge_df = create_edges(
+      from = c("origin", "origin"),
+      to = c("alice", "bob"),
+      color = "lightseagreen"
+    )
   ) ->
   graph_5
 
 render_graph(graph_5)
 
 graph_5 %>%
-  add_node(
-    node = "a1",
-    label = "A",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 9,
-    y = 14
+  add_node_df(
+    node_df = create_nodes(
+      node = "a1",
+      label = "A",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 9,
+      y = 14
+    )
   ) %>%
-  add_node(
-    node = "b1",
-    label = "A",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 1,
-    y = 6
+  add_node_df(
+    node_df = create_nodes(
+      node = "b1",
+      label = "A",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 1,
+      y = 6
+    )
   ) ->
   graph_6
 
 render_graph(graph_6)
 
 new_edge <-
-  create_edges(
-    from = "a1",
-    to = "a2",
-    color = "lightgrey"
-  )
 
 graph_6 %>%
-  add_node(
-    node = "a2",
-    label = "B",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 10,
-    y = 13
+  add_node_df(
+    node_df = create_nodes(
+      node = "a2",
+      label = "B",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 10,
+      y = 13
+    )
   ) %>%
-  add_edges(
-    edges_df = new_edge
-    ) ->
-    graph_7
+  add_edge_df(
+    edge_df = create_edges(
+      from = "a1",
+      to = "a2",
+      color = "lightgrey"
+    )
+  ) ->
+  graph_7
 
 render_graph(graph_7)
 
-new_edges <- create_edges(
-  from = "alice",
-  to = "dictator",
-  color = "lightseagreen"
-)
-
 graph_7 %>%
-  add_edges(
-    edges_df = new_edges
+  add_edge_df(
+    edge_df = create_edges(
+      from = "alice",
+      to = "dictator",
+      color = "lightseagreen"
+    )
   ) ->
   graph_8
 
 render_graph(graph_8)
 
-new_edge <-
-  create_edges(
-    from = "d1",
-    to = "d2b",
-    color = "lightgrey"
-  )
-
 graph_8 %>%
-  add_node(
-    node = "d2b",
-    label = "B",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 10,
-    y = 5
+  add_node_df(
+    node_df = create_nodes(
+      node = "d2",
+      label = "B",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 10,
+      y = 5
+    )
   ) %>%
-  add_edges(
-    edges_df = new_edge
+  add_edge_df(
+    edge_df = create_edges(
+      from = "d1",
+      to = "d2",
+      color = "lightgrey"
+    )
   ) ->
   graph_9
 
 render_graph(graph_9)
 
-new_edges <-
-  create_edges(
-    from = c("d1", "d2b"),
-    to = c("d2", "d2"),
-    color = "lightgrey"
-  )
-
 graph_9 %>%
-  add_node(
-    node = "d2",
-    label = "C",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 9,
-    y = 4
+  add_node_df(
+    node_df = create_nodes(
+      node = "d3",
+      label = "C",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 9,
+      y = 4
+    )
   ) %>%
-  add_edges(
-    edges_df = new_edges
-    ) ->
-    graph_10
+  add_edge_df(
+    edge_df = create_edges(
+      from = c("d1", "d2"),
+      to = c("d3", "d3"),
+      color = "lightgrey"
+    )
+  ) ->
+  graph_10
 
 render_graph(graph_10)
 
-  create_edges(
-    from = "d1",
-    to = "d2",
-    color = "lightgrey"
-  )
-
 graph_10 %>%
-  add_node(
-    node = "o2",
-    label = "B",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 5,
-    y = 13
+  add_node_df(
+    node_df = create_nodes(
+      node = "o2",
+      label = "B",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 5,
+      y = 13
+    )
   ) %>%
-  add_edges(
-    edges_df = create_edges(
+  add_edge_df(
+    edge_df = create_edges(
       from = "o1",
       to = "o2",
       color = "lightgrey"
       )
     ) %>%
-  add_node(
-    node = "o3",
-    label = "C",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 4,
-    y = 12
+  add_node_df(
+    node_df = create_nodes(
+      node = "o3",
+      label = "C",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 4,
+      y = 12
+    )
   ) %>%
-  add_edges(
-    edges_df = create_edges(
+  add_edge_df(
+    edge_df = create_edges(
       from = c("o1", "o2"),
       to = c("o3", "o3"),
       color = "lightgrey"
-      )
-    ) ->
+    )
+  ) ->
   graph_11
 
 render_graph(graph_11)
 
 graph_11 %>%
-  add_node(
-    node = "b2",
-    label = "D",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 2,
-    y = 5
+  add_node_df(
+    node_df = create_nodes(
+      node = "b2",
+      label = "D",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 2,
+      y = 5
+    )
   ) %>%
-  add_edges(
-    edges_df = create_edges(
+  add_edge_df(
+    edge_df = create_edges(
       from = "b1",
       to = "b2",
       color = "lightgrey"
     )
   ) %>%
-  add_node(
-    node = "b3",
-    label = "E",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 2,
-    y = 4
+  add_node_df(
+    node_df = create_nodes(
+      node = "b3",
+      label = "E",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 2,
+      y = 4
+    )
   ) %>%
-  add_edges(
-    edges_df = create_edges(
+  add_edge_df(
+    edge_df = create_edges(
       from = "b2",
       to = "b3",
       color = "lightgrey"
@@ -303,35 +322,57 @@ graph_11 %>%
 render_graph(graph_12)
 
 graph_12 %>%
-  add_node(
-    node = "b4",
-    label = "B",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 0,
-    y = 5
+  add_node_df(
+    node_df = create_nodes(
+      node = "b4",
+      label = "B",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 0,
+      y = 5
+    )
   ) %>%
-  add_edges(
-    edges_df = create_edges(
+  add_edge_df(
+    edge_df = create_edges(
       from = "b1",
       to = "b4",
       color = "lightgrey"
     )
   ) %>%
-  add_node(
-    node = "b5",
-    label = "C",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 1,
-    y = 4
+  add_node_df(
+    node_df = create_nodes(
+      node = "b5",
+      label = "C",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 1,
+      y = 4
+    )
   ) %>%
-  add_edges(
-    edges_df = create_edges(
+  add_edge_df(
+    edge_df = create_edges(
       from = c("b4", "b1"),
       to = c("b5", "b5"),
+      color = "lightgrey"
+    )
+  ) %>%
+  add_node_df(
+    node_df = create_nodes(
+      node = "a3",
+      label = "C",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 9,
+      y = 12
+    )
+  ) %>%
+  add_edge_df(
+    edge_df = create_edges(
+      from = c("a1", "a2"),
+      to = c("a3", "a3"),
       color = "lightgrey"
     )
   ) ->
@@ -352,17 +393,19 @@ graph_14 %>%
   delete_node(
     node = "b2"
   ) %>%
-  add_node(
-    node = "b2",
-    label = "D",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 2,
-    y = 3
+  add_node_df(
+    node_df = create_nodes(
+      node = "b2",
+      label = "D",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 2,
+      y = 3
+    )
   ) %>%
-  add_edges(
-    edges_df = create_edges(
+  add_edge_df(
+    edge_df = create_edges(
       from = c("b5", "b2"),
       to = c("b2", "b3"),
       color = "lightgrey"
@@ -376,32 +419,23 @@ graph_14 %>%
 
 render_graph(graph_15)
 
-display_graph_object(graph_15)
-render_graph(graph_15, output = "DOT")
-
-node_present(graph_15, node = "b3")
-
-get_edges(graph_15, return_type = "df")
-
-get_predecessors(graph_15, "b5")
-
-node_type(graph_15, node = "b5", action = "create", value =  )
-
 graph_15 %>%
   delete_node(
     node = "b3"
   ) %>%
-  add_node(
-    node = "b3",
-    label = "E",
-    style = "filled",
-    shape = "circle",
-    color = "orange",
-    x = 2,
-    y = 2
+  add_node_df(
+    node_df = create_nodes(
+      node = "b3",
+      label = "E",
+      style = "filled",
+      shape = "circle",
+      color = "orange",
+      x = 2,
+      y = 2
+    )
   ) %>%
-  add_edges(
-    edges_df = create_edges(
+  add_edge_df(
+    edge_df = create_edges(
       from = "b2",
       to = "b3",
       color = "lightgrey"
@@ -423,6 +457,16 @@ render_graph_from_series(
   graph_series = series,
   graph_no = 2)
 
+display_graph_object(graph_15)
+render_graph(graph_15, output = "DOT")
+
+node_present(graph_15, node = "b3")
+
+get_edges(graph_15, return_type = "df")
+
+get_predecessors(graph_15, "b5")
+
+node_type(graph_15, node = "b5", action = "create", value =  )
 
 #___________________________________
 
