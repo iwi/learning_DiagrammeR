@@ -1,6 +1,5 @@
 ###
-# Create two data frames for nodes
-# Singly supplied attribute values are repeated down
+# Create graph for basic Git workflow presentation
 ###
 
 source("/home/iwi/projectes/DiagrammeR/R/add_node.R")
@@ -13,13 +12,9 @@ source("/home/iwi/projectes/DiagrammeR/R/is_graph_empty.R")
 source("/home/iwi/projectes/DiagrammeR/R/combine_nodes.R")
 source("/home/iwi/projectes/DiagrammeR/R/is_graph_directed.R")
 source("/home/iwi/projectes/DiagrammeR/R/add_node_df.R")
-source("/home/iwi/projectes/DiagrammeR/R/")
-
-
 
 library(DiagrammeR)
 library(magrittr)
-# library(V8)
 
 # create a new graph series
 series <- create_series(series_type = "sequential",
