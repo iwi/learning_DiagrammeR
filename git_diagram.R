@@ -20,6 +20,18 @@ library(magrittr)
 series <- create_series(series_type = "sequential",
                         series_name = "git_workflow_example")
 
+
+# Define location of users and relative positions
+
+origin_location <- data.frame(x = 4,
+                              y = 15)
+dictator_location <- data.frame(x = origin_location$x + 5,
+                                y = origin_location$y - 8)
+alice_location <- data.frame(x = origin_location$x + 5,
+                             y = origin_location$y)
+bob_location <- data.frame(x = origin_location$x - 3,
+                           y = origin_location$y - 8)
+
 # Set up: just the labels
 nodes <-
   create_nodes(
@@ -38,10 +50,10 @@ nodes <-
       rep(x = "lightgrey", 4)
       ),
     x = c(
-      9, 9, 1, 4
+      dictator_location$x, alice_location$x, bob_location$x, origin_location$x
       ),
     y = c(
-      7, 15, 7, 15
+      dictator_location$y, alice_location$y, bob_location$y, origin_location$y
       )
   )
 
@@ -73,28 +85,25 @@ graph_1 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 9,
-      y = 6
+      x = dictator_location$x,
+      y = dictator_location$y - 1
     )
   ) ->
   graph_2
 
 render_graph(graph_2)
 
-new_edges <- create_edges(
-  from = "dictator",
-  to = "origin",
-  color = "lightseagreen"
-)
-
 graph_2 %>%
   add_edge_df(
-    edge_df = new_edges
+    edge_df = create_edges(
+      from = "dictator",
+      to = "origin",
+      color = "lightseagreen"
+    )
   ) ->
   graph_3
 
 render_graph(graph_3)
-graph_3
 
 graph_3 %>%
   add_node_df(
@@ -104,8 +113,8 @@ graph_3 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 4,
-      y = 14
+      x = origin_location$x,
+      y = origin_location$y - 1
     )
   ) ->
   graph_4
@@ -132,8 +141,8 @@ graph_5 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 9,
-      y = 14
+      x = alice_location$x,
+      y = alice_location$y - 1
     )
   ) %>%
   add_node_df(
@@ -143,15 +152,13 @@ graph_5 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 1,
-      y = 6
+      x = bob_location$x,
+      y = bob_location$y - 1
     )
   ) ->
   graph_6
 
 render_graph(graph_6)
-
-new_edge <-
 
 graph_6 %>%
   add_node_df(
@@ -161,8 +168,8 @@ graph_6 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 10,
-      y = 13
+      x = alice_location$x + 1,
+      y = alice_location$y - 2
     )
   ) %>%
   add_edge_df(
@@ -196,8 +203,8 @@ graph_8 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 10,
-      y = 5
+      x = dictator_location$x + 1,
+      y = dictator_location$y - 2
     )
   ) %>%
   add_edge_df(
@@ -219,8 +226,8 @@ graph_9 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 9,
-      y = 4
+      x = dictator_location$x,
+      y = dictator_location$y - 3
     )
   ) %>%
   add_edge_df(
@@ -242,8 +249,8 @@ graph_10 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 5,
-      y = 13
+      x = origin_location$x + 1,
+      y = origin_location$y - 2
     )
   ) %>%
   add_edge_df(
@@ -260,8 +267,8 @@ graph_10 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 4,
-      y = 12
+      x = origin_location$x,
+      y = origin_location$y - 3
     )
   ) %>%
   add_edge_df(
@@ -283,8 +290,8 @@ graph_11 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 2,
-      y = 5
+      x = bob_location$x + 1,
+      y = bob_location$y - 2
     )
   ) %>%
   add_edge_df(
@@ -301,8 +308,8 @@ graph_11 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 2,
-      y = 4
+      x = bob_location$x + 1,
+      y = bob_location$y - 3
     )
   ) %>%
   add_edge_df(
@@ -324,8 +331,8 @@ graph_12 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 0,
-      y = 5
+      x = bob_location$x - 1,
+      y = bob_location$y - 2
     )
   ) %>%
   add_edge_df(
@@ -342,8 +349,8 @@ graph_12 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 1,
-      y = 4
+      x = bob_location$x,
+      y = bob_location$y - 3
     )
   ) %>%
   add_edge_df(
@@ -360,8 +367,8 @@ graph_12 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 9,
-      y = 12
+      x = alice_location$x,
+      y = alice_location$y - 3
     )
   ) %>%
   add_edge_df(
@@ -395,8 +402,8 @@ graph_14 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 2,
-      y = 3
+      x = bob_location$x + 1,
+      y = bob_location$y - 4
     )
   ) %>%
   add_edge_df(
@@ -425,8 +432,8 @@ graph_15 %>%
       style = "filled",
       shape = "circle",
       color = "orange",
-      x = 2,
-      y = 2
+      x = bob_location$x + 1,
+      y = bob_location$y - 5
     )
   ) %>%
   add_edge_df(
