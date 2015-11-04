@@ -20,17 +20,15 @@ library(magrittr)
 series <- create_series(series_type = "sequential",
                         series_name = "git_workflow_example")
 
-
 # Define location of users and relative positions
-
 origin_location <- data.frame(x = 4,
                               y = 15)
 dictator_location <- data.frame(x = origin_location$x + 5,
-                                y = origin_location$y - 8)
+                                y = origin_location$y - 5)
 alice_location <- data.frame(x = origin_location$x + 5,
                              y = origin_location$y)
 bob_location <- data.frame(x = origin_location$x - 3,
-                           y = origin_location$y - 8)
+                           y = origin_location$y - 5)
 
 # Set up: just the labels
 nodes <-
@@ -58,7 +56,6 @@ nodes <-
   )
 
 # Build first graph with just the labels.
-# Parameters are the ones that will be used by defoult if not specified
 graph_1 <-
   create_graph(
     graph_name = "git_workflow",
@@ -448,27 +445,22 @@ graph_15 %>%
 render_graph(graph_16)
 
 
-
-graph_1 %>%
-  add_to_series(series) ->
-  series
-
-graph_11$graph_name <- "git_workflow"
-
-render_graph_from_series(
-  graph_series = series,
-  graph_no = 2)
-
-display_graph_object(graph_15)
-render_graph(graph_15, output = "DOT")
-
-node_present(graph_15, node = "b3")
-
-get_edges(graph_15, return_type = "df")
-
-get_predecessors(graph_15, "b5")
-
-node_type(graph_15, node = "b5", action = "create", value =  )
+graph_1 %>% add_to_series(series) -> series
+graph_2 %>% add_to_series(series) -> series
+graph_3 %>% add_to_series(series) -> series
+graph_4 %>% add_to_series(series) -> series
+graph_5 %>% add_to_series(series) -> series
+graph_6 %>% add_to_series(series) -> series
+graph_7 %>% add_to_series(series) -> series
+graph_8 %>% add_to_series(series) -> series
+graph_9 %>% add_to_series(series) -> series
+graph_10 %>% add_to_series(series) -> series
+graph_11 %>% add_to_series(series) -> series
+graph_12 %>% add_to_series(series) -> series
+graph_13 %>% add_to_series(series) -> series
+graph_14 %>% add_to_series(series) -> series
+graph_15 %>% add_to_series(series) -> series
+graph_16 %>% add_to_series(series) -> series
 
 #___________________________________
 
@@ -490,5 +482,5 @@ render_graph_from_series(
 
 render_graph_from_series(
   graph_series = series,
-  graph_no = 5)
+  graph_no = 16)
 
