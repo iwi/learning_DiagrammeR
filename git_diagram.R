@@ -445,6 +445,9 @@ graph_15 %>%
 render_graph(graph_16)
 
 
+render_graph(graph_16, output = "SVG") %>%
+  cat(file = "~/coses_per_ordenar/graph.svg")
+
 graph_1 %>% add_to_series(series) -> series
 graph_2 %>% add_to_series(series) -> series
 graph_3 %>% add_to_series(series) -> series
