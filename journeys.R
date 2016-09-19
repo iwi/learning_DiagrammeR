@@ -8,8 +8,15 @@ library('readr')
 # get paths
 paths <- read_csv('paths.csv', col_names = FALSE)
 
+
+
+
+
+
+
+
 # Set up with initial nodes and edges 
-number_of_nodes <- 10
+number_of_nodes <- length(paths[1,]) 
 
 initial_nodes <-
   create_nodes(
@@ -20,15 +27,20 @@ initial_nodes <-
     color = "lightgrey", 
   )
 
-initial_nodes$label <- paste('C', 1:number_of_nodes, sep = '') 
+# add the labels coming from the source file
+for (nd in 1:number_of_nodes) {
+  initial_nodes$label[nd] <- paths[1, nd]
+}
 
-froms <- 
 
+# assume that the input sequence of nodes define a path
+froms <- initial_nodes$nodes[-number_of_nodes]
+tos <- initial_nodes$nodes[-1]
 
 initial_edges <- 
   create_edges(
-    from = c(1:(number_of_nodes - 1)),
-    to = c(2:number_of_nodes), 
+    from = froms, 
+    to = tos, 
     color = "lightseagreen"
   )
 
@@ -52,6 +64,23 @@ graph_1 <-
   )
 
 render_graph(graph_1)
+
+
+graph_1$nodes_df$nodes[which("C6" ==  graph_1$nodes_df$label)]
+
+# add a node to a graph if its label does not exist
+add_new_node <- function(graph, node){
+  node_id <- graph$nodes_df$nodes[which(node == graph$nodes_df$label)]
+  if (node_present(graph, node_id)) {
+    graph %>% 
+      add_node_df(node = graph$node[number_of_nodes],
+                  label = node)
+  }
+}
+
+add_new_node(graph_1, "C6")
+
+
 
 graph_1 %>%
   add_edge_df(
